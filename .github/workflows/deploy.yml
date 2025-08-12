@@ -29,7 +29,7 @@ jobs:
       run: pnpm install --frozen-lockfile
       
     - name: Build and Export
-      run: pnpm run export
+      run: DEPLOY_TARGET=gh-pages NODE_ENV=production pnpm run build
       
     - name: List build output
       run: |
