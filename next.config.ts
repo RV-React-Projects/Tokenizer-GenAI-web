@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: process.env.NODE_ENV === "production" ? "/Tokenizer-GenAI-web" : "",
+  basePath: "/Tokenizer-GenAI-web",
 };
 
 export default nextConfig;
