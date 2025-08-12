@@ -11,10 +11,11 @@ import {
   Header,
   TokenDecoder,
   Footer,
+  Button,
 } from "@/components";
 import { smartTokenizer, TokenInfo } from "@/lib/tokenizer";
 import toast from "react-hot-toast";
-import { Copy, Sparkles } from "lucide-react";
+import { Copy, Sparkles, Code } from "lucide-react";
 
 export default function Home() {
   const { currentTheme } = useTheme();
@@ -62,10 +63,10 @@ export default function Home() {
   }, [inputText]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50/80 to-blue-50/80 dark:from-slate-900/80 dark:to-slate-800/80 transition-all duration-300 backdrop-blur-sm">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/50 to-purple-50/50 dark:from-slate-900 dark:via-slate-800/50 dark:to-slate-900 transition-all duration-500 backdrop-blur-sm">
       <Header />
 
-      <main className="container mx-auto px-4 py-8 max-w-6xl">
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-7xl">
         <div className="text-center mb-12 animate-fade-in">
           <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4 animate-pulse flex items-center justify-center gap-4">
             <Sparkles className="w-12 h-12 text-purple-500 animate-pulse" />
@@ -99,12 +100,47 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 mb-12">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8 mb-12">
           <div className="space-y-6">
             <TokenizerInput
               onTokenize={handleTokenize}
               isProcessing={isProcessing}
             />
+
+            {/* Encoded Section moved to left */}
+            <div className="bg-white/20 dark:bg-slate-800/20 backdrop-blur-xl rounded-xl shadow-lg border border-slate-200/50 dark:border-slate-700/50 p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                  <Code className="w-5 h-5 text-blue-500" />
+                  Encoded Sequence
+                </h3>
+                <Button
+                  onClick={() => {
+                    navigator.clipboard
+                      .writeText(`[${tokenIds.join(", ")}]`)
+                      .then(() => {
+                        toast.success("Encoded sequence copied to clipboard!");
+                      })
+                      .catch(() => {
+                        toast.error("Failed to copy to clipboard");
+                      });
+                  }}
+                  variant="glass"
+                  size="sm"
+                  disabled={tokenIds.length === 0}
+                >
+                  <Copy className="w-4 h-4 mr-1" />
+                  Copy
+                </Button>
+              </div>
+              <div className="bg-slate-50/50 dark:bg-slate-700/50 rounded-lg p-4">
+                <div className="font-mono text-sm text-slate-800 dark:text-slate-200 break-all">
+                  {tokenIds.length > 0
+                    ? `[${tokenIds.join(", ")}]`
+                    : "No tokens to encode yet..."}
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="space-y-6">
@@ -121,7 +157,8 @@ export default function Home() {
         {/* Token Decoder Section */}
         <div className="mb-16">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4 flex items-center justify-center gap-3">
+              <Code className="w-8 h-8 text-blue-500" />
               Token Decoder
             </h2>
             <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">

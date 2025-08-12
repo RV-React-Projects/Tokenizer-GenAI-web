@@ -17,8 +17,12 @@ export const TokenizerInput: React.FC<TokenizerInputProps> = ({
   isProcessing,
 }) => {
   const { currentTheme } = useTheme();
-  const [inputText, setInputText] = useState("");
-  const [charCount, setCharCount] = useState(0);
+  const [inputText, setInputText] = useState(
+    "Hello, there! how are u doing? are you ready Understand how AI models process and encode your content and give it a try!"
+  );
+  const [charCount, setCharCount] = useState(
+    "Hello, there! how are u doing? are you ready Understand how AI models process and encode your content and give it a try!".length
+  );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const text = e.target.value;
