@@ -1,103 +1,150 @@
-import Image from "next/image";
+"use client";
+
+import { useState, useEffect } from "react";
+import { useTheme } from "@/contexts/ThemeContext";
+import { cn } from "@/lib/utils";
+import {
+  TokenizerInput,
+  TokenizerOutput,
+  EnhancedTokenizerOutput,
+  ThemeToggle,
+  Header,
+  TokenDecoder,
+  Footer,
+} from "@/components";
+import { smartTokenizer, TokenInfo } from "@/lib/tokenizer";
+import toast from "react-hot-toast";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const { currentTheme } = useTheme();
+  const [inputText, setInputText] = useState(
+    "Hello, there! how are u doing? are you ready Understand how AI models process and encode your content and give it a try!"
+  );
+  const [tokens, setTokens] = useState<TokenInfo[]>([]);
+  const [tokenIds, setTokenIds] = useState<number[]>([]);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [vocabularySize, setVocabularySize] = useState(0);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+  const handleTokenize = async (text: string) => {
+    if (!text.trim()) return;
+
+    setIsProcessing(true);
+    setInputText(text);
+
+    try {
+      // Use smart tokenizer
+      const result = smartTokenizer.tokenize(text);
+      setTokens(result.tokens);
+      setTokenIds(result.tokenIds);
+      setVocabularySize(result.vocabulary.size);
+    } catch (error) {
+      console.error("Tokenization error:", error);
+      toast.error("Failed to tokenize text. Please try again.");
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  // Auto-tokenize on input change
+  useEffect(() => {
+    if (inputText.trim()) {
+      try {
+        const result = smartTokenizer.tokenize(inputText);
+        setTokens(result.tokens);
+        setTokenIds(result.tokenIds);
+        setVocabularySize(result.vocabulary.size);
+      } catch (error) {
+        console.error("Auto-tokenization error:", error);
+        // Don't show toast for auto-tokenization errors
+      }
+    }
+  }, [inputText]);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50/80 to-blue-50/80 dark:from-slate-900/80 dark:to-slate-800/80 transition-all duration-300 backdrop-blur-sm">
+      <Header />
+
+      <main className="container mx-auto px-4 py-8 max-w-6xl">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
+            Tokenizer Web
+          </h1>
+          <p className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-6">
+            Convert your text into tokens with advanced AI-powered tokenization.
+            Understand how AI models process and encode your content.
+          </p>
+
+          <div className="flex items-center justify-center gap-4">
+            <button
+              onClick={() => {
+                navigator.clipboard
+                  .writeText(
+                    "Hello, there! how are u doing? are you ready Understand how AI models process and encode your content and give it a try!"
+                  )
+                  .then(() => {
+                    toast.success("Sample text copied to clipboard!");
+                  })
+                  .catch(() => {
+                    toast.error("Failed to copy to clipboard");
+                  });
+              }}
+              className="px-4 py-2 rounded-lg font-medium transition-all duration-200 bg-blue-100/50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 hover:bg-blue-200/50 dark:hover:bg-blue-800/40 flex items-center gap-2"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                />
+              </svg>
+              Copy Sample Text
+            </button>
+          </div>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-8 mb-12">
+          <div className="space-y-6">
+            <TokenizerInput
+              onTokenize={handleTokenize}
+              isProcessing={isProcessing}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </div>
+
+          <div className="space-y-6">
+            <EnhancedTokenizerOutput
+              tokens={tokens}
+              tokenIds={tokenIds}
+              inputText={inputText}
+              isProcessing={isProcessing}
+              vocabularySize={vocabularySize}
+            />
+          </div>
+        </div>
+
+        {/* Token Decoder Section */}
+        <div className="mb-16">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">
+              Token Decoder
+            </h2>
+            <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+              Convert your token arrays back to readable text. Perfect for
+              testing and verification.
+            </p>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <TokenDecoder />
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+      <Footer />
     </div>
   );
 }
