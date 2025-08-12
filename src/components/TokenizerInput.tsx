@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useTheme } from "@contexts/ThemeContext";
 import { cn } from "@lib/utils";
 import toast from "react-hot-toast";
 import { Copy, FileText, Zap } from "lucide-react";
@@ -16,7 +15,6 @@ export const TokenizerInput: React.FC<TokenizerInputProps> = ({
   onTokenize,
   isProcessing,
 }) => {
-  const { currentTheme } = useTheme();
   const [inputText, setInputText] = useState(
     "Hello, there! how are u doing? are you ready Understand how AI models process and encode your content and give it a try!"
   );

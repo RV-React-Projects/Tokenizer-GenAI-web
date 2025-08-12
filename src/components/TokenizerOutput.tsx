@@ -1,6 +1,5 @@
 "use client";
 
-import { useTheme } from "@contexts/ThemeContext";
 import { cn } from "@lib/utils";
 import toast from "react-hot-toast";
 import { Token } from "types/Tokens";
@@ -16,8 +15,6 @@ export const TokenizerOutput: React.FC<TokenizerOutputProps> = ({
   inputText,
   isProcessing,
 }) => {
-  const { currentTheme } = useTheme();
-
   if (isProcessing) {
     return (
       <div className="bg-white/20 dark:bg-slate-800/20 backdrop-blur-xl rounded-xl shadow-lg border border-slate-200/50 dark:border-slate-700/50 p-6">
