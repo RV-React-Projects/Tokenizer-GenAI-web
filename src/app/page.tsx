@@ -1,24 +1,19 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useTheme } from "@/contexts/ThemeContext";
-import { cn } from "@/lib/utils";
 import {
   TokenizerInput,
-  TokenizerOutput,
   EnhancedTokenizerOutput,
-  ThemeToggle,
   Header,
   TokenDecoder,
   Footer,
   Button,
-} from "@/components";
-import { smartTokenizer, TokenInfo } from "@/lib/tokenizer";
+} from "@components/index";
+import { smartTokenizer, TokenInfo } from "@lib/tokenizer";
 import toast from "react-hot-toast";
 import { Copy, Sparkles, Code } from "lucide-react";
 
 export default function Home() {
-  const { currentTheme } = useTheme();
   const [inputText, setInputText] = useState(
     "Hello, there! how are u doing? are you ready Understand how AI models process and encode your content and give it a try!"
   );

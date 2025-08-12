@@ -1,9 +1,9 @@
 "use client";
 
-import { useTheme } from "@/contexts/ThemeContext";
-import { cn } from "@/lib/utils";
-import { Token } from "@/types";
+import { useTheme } from "@contexts/ThemeContext";
+import { cn } from "@lib/utils";
 import toast from "react-hot-toast";
+import { Token } from "types/Tokens";
 
 interface TokenizerOutputProps {
   tokens: Token[];

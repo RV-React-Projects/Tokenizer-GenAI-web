@@ -1,15 +1,14 @@
 "use client";
 
-import { useTheme } from "@/contexts/ThemeContext";
-import { cn } from "@/lib/utils";
-import { TokenInfo } from "@/lib/tokenizer";
+import { cn } from "@lib/utils";
+import { TokenInfo } from "@lib/tokenizer";
 import {
   getTokenColor,
   getTokenDisplayText,
   getTypeColor,
-} from "@/lib/tokenColors";
+} from "@lib/tokenColors";
 import toast from "react-hot-toast";
-import { Copy, BarChart3, Hash, FileText, List, Code } from "lucide-react";
+import { Copy } from "lucide-react";
 import { Button } from "./ui/button";
 
 interface EnhancedTokenizerOutputProps {
@@ -23,8 +22,6 @@ interface EnhancedTokenizerOutputProps {
 export const EnhancedTokenizerOutput: React.FC<
   EnhancedTokenizerOutputProps
 > = ({ tokens, tokenIds, inputText, isProcessing, vocabularySize }) => {
-  const { currentTheme } = useTheme();
-
   if (isProcessing) {
     return (
       <div className="bg-white/20 dark:bg-slate-800/20 backdrop-blur-xl rounded-xl shadow-lg border border-slate-200/50 dark:border-slate-700/50 p-6">

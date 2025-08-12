@@ -1,9 +1,6 @@
-'use client';
-
-import { useTheme } from '@/contexts/ThemeContext';
+"use client";
 
 export const Footer: React.FC = () => {
-  const { currentTheme } = useTheme();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -21,14 +18,18 @@ export const Footer: React.FC = () => {
               </span>
             </div>
             <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-              A modern AI-powered text tokenization tool that helps you understand how AI models process and encode text content. 
-              Convert your text into tokens and explore the fascinating world of natural language processing.
+              A modern AI-powered text tokenization tool that helps you
+              understand how AI models process and encode text content. Convert
+              your text into tokens and explore the fascinating world of natural
+              language processing.
             </p>
           </div>
 
           {/* Features */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-slate-900 dark:text-white">Features</h3>
+            <h3 className="font-semibold text-slate-900 dark:text-white">
+              Features
+            </h3>
             <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-300">
               <li>• Real-time text tokenization</li>
               <li>• Dark/Light theme support</li>
@@ -41,11 +42,13 @@ export const Footer: React.FC = () => {
 
           {/* Links */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-slate-900 dark:text-white">Links</h3>
+            <h3 className="font-semibold text-slate-900 dark:text-white">
+              Links
+            </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <a 
-                  href="https://github.com/RV-React-Projects/Tokenizer-GenAI-web" 
+                <a
+                  href="https://github.com/RV-React-Projects/Tokenizer-GenAI-web"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
@@ -54,16 +57,16 @@ export const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a 
-                  href="#features" 
+                <a
+                  href="#features"
                   className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
                   Features
                 </a>
               </li>
               <li>
-                <a 
-                  href="#about" 
+                <a
+                  href="#about"
                   className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
                   About
@@ -76,16 +79,16 @@ export const Footer: React.FC = () => {
         {/* Copyright */}
         <div className="border-t border-slate-200/50 dark:border-slate-700/50 mt-8 pt-8 text-center">
           <p className="text-slate-500 dark:text-slate-400 text-sm">
-            Made with ❤️ and ☕ by{' '}
-            <a 
-              href="https://github.com/ranvijaychouhan12" 
+            Made with ❤️ and ☕ by{" "}
+            <a
+              href="https://github.com/ranvijaychouhan12"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
             >
               Ranvijay Chouhan
-            </a>
-            {' '}• © {currentYear} All rights reserved
+            </a>{" "}
+            • © {currentYear} All rights reserved
           </p>
         </div>
       </div>

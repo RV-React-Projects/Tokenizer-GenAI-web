@@ -1,13 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { useTheme } from "@/contexts/ThemeContext";
-import { cn } from "@/lib/utils";
+import { cn } from "@lib/utils";
 import toast from "react-hot-toast";
-import { smartTokenizer } from "@/lib/tokenizer";
+import { smartTokenizer } from "@lib/tokenizer";
 
 export const TokenDecoder: React.FC = () => {
-  const { currentTheme } = useTheme();
   const [tokenInput, setTokenInput] = useState("");
   const [decodedText, setDecodedText] = useState("");
   const [isDecoding, setIsDecoding] = useState(false);

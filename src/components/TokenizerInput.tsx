@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { useTheme } from "@/contexts/ThemeContext";
-import { cn } from "@/lib/utils";
+import { useTheme } from "@contexts/ThemeContext";
+import { cn } from "@lib/utils";
 import toast from "react-hot-toast";
 import { Copy, FileText, Zap } from "lucide-react";
 import { Button } from "./ui/button";
@@ -21,7 +21,8 @@ export const TokenizerInput: React.FC<TokenizerInputProps> = ({
     "Hello, there! how are u doing? are you ready Understand how AI models process and encode your content and give it a try!"
   );
   const [charCount, setCharCount] = useState(
-    "Hello, there! how are u doing? are you ready Understand how AI models process and encode your content and give it a try!".length
+    "Hello, there! how are u doing? are you ready Understand how AI models process and encode your content and give it a try!"
+      .length
   );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

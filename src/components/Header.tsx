@@ -1,13 +1,9 @@
 "use client";
 
-import { useTheme } from "@/contexts/ThemeContext";
-import { cn } from "@/lib/utils";
 import { ThemeToggle } from "./ThemeToggle";
 import { Github, Zap } from "lucide-react";
 
 export const Header: React.FC = () => {
-  const { currentTheme } = useTheme();
-
   return (
     <header className="border-b border-slate-200/50 dark:border-slate-700/50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50 shadow-lg shadow-slate-200/20 dark:shadow-slate-900/20">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">

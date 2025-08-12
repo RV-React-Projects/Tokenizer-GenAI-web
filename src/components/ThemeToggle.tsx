@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useTheme } from '@/contexts/ThemeContext';
-import { cn } from '@/lib/utils';
+import { useTheme } from "@contexts/ThemeContext";
+import { cn } from "@lib/utils";
 
 export const ThemeToggle: React.FC = () => {
   const { themeMode, toggleTheme } = useTheme();
@@ -16,7 +16,7 @@ export const ThemeToggle: React.FC = () => {
       )}
       aria-label={`Current theme: ${themeMode}. Click to toggle.`}
     >
-      {themeMode === 'dark' ? (
+      {themeMode === "dark" ? (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
           <path
             fillRule="evenodd"
