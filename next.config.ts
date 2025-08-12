@@ -1,12 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'export',
+  output: "export",
   trailingSlash: true,
   images: {
-    unoptimized: true
+    unoptimized: true,
   },
-  basePath: process.env.NODE_ENV === 'production' ? '/Tokenizer-GenAI-web' : '',
+  basePath: process.env.NODE_ENV === "production" ? "/Tokenizer-GenAI-web" : "",
 };
 
 export default nextConfig;
