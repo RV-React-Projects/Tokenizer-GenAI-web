@@ -15,8 +15,8 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   output: "export",
-  basePath: isVercel ? "" : (isGhPages && isProd ? `/${repo}` : ""),
-  assetPrefix: isVercel ? "" : (isGhPages && isProd ? `/${repo}/` : ""),
+  basePath: isVercel ? "" : isGhPages && isProd ? `/${repo}` : "",
+  assetPrefix: isVercel ? "" : isGhPages && isProd ? `/${repo}/` : "",
 };
 
 export default nextConfig;

@@ -2,7 +2,7 @@
   "name": "tokenizer-web",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ranvijaychouhan12.github.io/Tokenizer-GenAI-web",
+  "homepage": "https://rv-react-projects.github.io/Tokenizer-GenAI-web",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
