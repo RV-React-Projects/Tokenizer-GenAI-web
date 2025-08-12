@@ -9,6 +9,8 @@ import {
   getTypeColor,
 } from "@/lib/tokenColors";
 import toast from "react-hot-toast";
+import { Copy, BarChart3, Hash, FileText, List, Code } from "lucide-react";
+import { Button } from "./ui/button";
 
 interface EnhancedTokenizerOutputProps {
   tokens: TokenInfo[];
@@ -148,25 +150,15 @@ export const EnhancedTokenizerOutput: React.FC<
           <div className="text-sm text-slate-600 dark:text-slate-400">
             Total Tokens
           </div>
-          <button
+          <Button
             onClick={handleCopyTokens}
-            className="absolute top-2 right-2 p-1.5 rounded bg-blue-100/50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 hover:bg-blue-200/50 dark:hover:bg-blue-800/40 transition-colors"
+            variant="ghost"
+            size="icon"
+            className="absolute top-2 right-2 h-8 w-8 bg-blue-100/50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 hover:bg-blue-200/50 dark:hover:bg-blue-800/40"
             title="Copy token array"
           >
-            <svg
-              className="w-3.5 h-3.5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-              />
-            </svg>
-          </button>
+            <Copy className="w-3.5 h-3.5" />
+          </Button>
         </div>
 
         <div className="bg-slate-50/50 dark:bg-slate-700/50 rounded-lg p-4 text-center relative">
@@ -176,25 +168,22 @@ export const EnhancedTokenizerOutput: React.FC<
           <div className="text-sm text-slate-600 dark:text-slate-400">
             Unique Tokens
           </div>
-          <button
+          <Button
             onClick={handleCopyText}
-            className="absolute top-2 right-2 p-1.5 rounded bg-purple-100/50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 hover:bg-purple-200/50 dark:hover:bg-purple-800/40 transition-colors"
+            variant="ghost"
+            size="icon"
+            className="absolute top-2 right-2 h-8 w-8 bg-purple-100/50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 hover:bg-purple-200/50 dark:hover:bg-purple-800/40"
             title="Copy input text"
           >
-            <svg
-              className="w-3.5 h-3.5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
                 d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
               />
-            </svg>
-          </button>
+            <Copy className="w-3.5 h-3.5" />
+          </Button>
         </div>
 
         <div className="bg-slate-50/50 dark:bg-slate-700/50 rounded-lg p-4 text-center">
@@ -313,7 +302,7 @@ export const EnhancedTokenizerOutput: React.FC<
           <div className="flex flex-wrap gap-1">
             {tokens.map((token, index) => (
               <div
-                key={token.id}
+                key={`${token.id}-${index}`}
                 className="px-2 py-1 bg-white/50 dark:bg-slate-800/50 rounded text-xs font-mono border border-slate-200/50 dark:border-slate-600/50"
               >
                 "{token.text}" → {token.id}

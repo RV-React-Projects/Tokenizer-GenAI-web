@@ -31,4 +31,4 @@ export interface TokenizerConfig {
   temperature: number;
 }
 
-export type ThemeMode = "light" | "dark" | "system";
+export type ThemeMode = "light" | "dark";

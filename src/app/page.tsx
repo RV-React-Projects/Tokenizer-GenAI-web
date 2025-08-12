@@ -14,6 +14,7 @@ import {
 } from "@/components";
 import { smartTokenizer, TokenInfo } from "@/lib/tokenizer";
 import toast from "react-hot-toast";
+import { Copy, Sparkles } from "lucide-react";
 
 export default function Home() {
   const { currentTheme } = useTheme();
@@ -65,13 +66,15 @@ export default function Home() {
       <Header />
 
       <main className="container mx-auto px-4 py-8 max-w-6xl">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
-            Tokenizer Web
+        <div className="text-center mb-12 animate-fade-in">
+          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4 animate-pulse flex items-center justify-center gap-4">
+            <Sparkles className="w-12 h-12 text-purple-500 animate-pulse" />
+            AI Tokenizer
+            <Sparkles className="w-12 h-12 text-pink-500 animate-pulse" />
           </h1>
           <p className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-6">
-            Convert your text into tokens with advanced AI-powered tokenization.
-            Understand how AI models process and encode your content.
+            Transform your text into AI-understandable tokens with advanced
+            tokenization
           </p>
 
           <div className="flex items-center justify-center gap-4">
@@ -88,21 +91,9 @@ export default function Home() {
                     toast.error("Failed to copy to clipboard");
                   });
               }}
-              className="px-4 py-2 rounded-lg font-medium transition-all duration-200 bg-blue-100/50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 hover:bg-blue-200/50 dark:hover:bg-blue-800/40 flex items-center gap-2"
+              className="px-4 py-2 rounded-lg font-medium transition-all duration-200 bg-blue-100/50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 hover:bg-blue-200/50 dark:hover:bg-blue-800/40 flex items-center gap-2 hover:scale-105"
             >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                />
-              </svg>
+              <Copy className="w-4 h-4" />
               Copy Sample Text
             </button>
           </div>

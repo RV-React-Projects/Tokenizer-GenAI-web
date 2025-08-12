@@ -36,9 +36,9 @@ export const TokenizerOutput: React.FC<TokenizerOutputProps> = ({
     );
   }
 
-        if (!inputText) {
-        return (
-          <div className="bg-white/20 dark:bg-slate-800/20 backdrop-blur-xl rounded-xl shadow-lg border border-slate-200/50 dark:border-slate-700/50 p-6">
+  if (!inputText) {
+    return (
+      <div className="bg-white/20 dark:bg-slate-800/20 backdrop-blur-xl rounded-xl shadow-lg border border-slate-200/50 dark:border-slate-700/50 p-6">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-4">
           Tokenization Results
         </h2>
@@ -171,7 +171,7 @@ export const TokenizerOutput: React.FC<TokenizerOutputProps> = ({
           <div className="flex flex-wrap gap-1">
             {tokens.map((token, index) => (
               <div
-                key={token.id}
+                key={`${token.id}-${index}`}
                 className={cn(
                   "px-2 py-1 rounded text-xs font-mono border transition-all duration-200",
                   "hover:scale-105 cursor-pointer",
@@ -196,7 +196,7 @@ export const TokenizerOutput: React.FC<TokenizerOutputProps> = ({
         <div className="bg-slate-50/50 dark:bg-slate-700/50 rounded-lg overflow-hidden">
           <div className="max-h-64 overflow-y-auto">
             <table className="w-full">
-                              <thead className="bg-slate-200/50 dark:bg-slate-600/50 sticky top-0">
+              <thead className="bg-slate-200/50 dark:bg-slate-600/50 sticky top-0">
                 <tr>
                   <th className="px-4 py-2 text-left text-xs font-medium text-slate-700 dark:text-slate-300">
                     #
@@ -214,8 +214,8 @@ export const TokenizerOutput: React.FC<TokenizerOutputProps> = ({
               </thead>
               <tbody>
                 {tokens.map((token, index) => (
-                                    <tr 
-                    key={token.id}
+                  <tr
+                    key={`${token.id}-${index}`}
                     className="border-b border-slate-200/50 dark:border-slate-600/50 hover:bg-slate-100/50 dark:hover:bg-slate-600/30"
                   >
                     <td className="px-4 py-2 text-xs text-slate-600 dark:text-slate-400 font-mono">

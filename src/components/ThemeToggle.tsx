@@ -4,12 +4,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { cn } from '@/lib/utils';
 
 export const ThemeToggle: React.FC = () => {
-  const { themeMode, setThemeMode } = useTheme();
-
-  const toggleTheme = () => {
-    const newMode = themeMode === 'light' ? 'dark' : 'light';
-    setThemeMode(newMode);
-  };
+  const { themeMode, toggleTheme } = useTheme();
 
   return (
     <button
@@ -19,7 +14,7 @@ export const ThemeToggle: React.FC = () => {
         "bg-slate-200/50 dark:bg-slate-700/50 hover:bg-slate-300/50 dark:hover:bg-slate-600/50",
         "text-slate-700 dark:text-slate-300 backdrop-blur-sm"
       )}
-      aria-label="Toggle theme"
+      aria-label={`Current theme: ${themeMode}. Click to toggle.`}
     >
       {themeMode === 'dark' ? (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">

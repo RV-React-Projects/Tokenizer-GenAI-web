@@ -5,3 +5,4 @@ export { TokenizerOutput } from './TokenizerOutput';
 export { EnhancedTokenizerOutput } from './EnhancedTokenizerOutput';
 export { TokenDecoder } from './TokenDecoder';
 export { Footer } from './Footer';
+export { Button } from './ui/button';

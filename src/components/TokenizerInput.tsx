@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/lib/utils";
 import toast from "react-hot-toast";
+import { Copy, FileText, Zap } from "lucide-react";
+import { Button } from "./ui/button";
 
 interface TokenizerInputProps {
   onTokenize: (text: string) => void;
@@ -82,16 +84,11 @@ export const TokenizerInput: React.FC<TokenizerInputProps> = ({
         </div>
 
         <div className="flex flex-wrap gap-3">
-          <button
+          <Button
             type="submit"
             disabled={isProcessing || !inputText.trim()}
-            className={cn(
-              "px-6 py-3 rounded-lg font-medium transition-all duration-200",
-              "bg-gradient-to-r from-blue-600 to-purple-600 text-white",
-              "hover:from-blue-700 hover:to-purple-700 hover:scale-105",
-              "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100",
-              "flex items-center gap-2"
-            )}
+            className="bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700"
+            size="lg"
           >
             {isProcessing ? (
               <>
@@ -100,43 +97,35 @@ export const TokenizerInput: React.FC<TokenizerInputProps> = ({
               </>
             ) : (
               <>
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 10V3L4 14h7v7l9-11h-7z"
-                  />
-                </svg>
+                <Zap className="w-4 h-4" />
                 Tokenize Text
               </>
             )}
-          </button>
+          </Button>
 
-          <button
+          <Button
             type="button"
             onClick={handleSampleText}
             disabled={isProcessing}
-            className="px-4 py-3 rounded-lg font-medium transition-all duration-200 bg-slate-200/50 dark:bg-slate-700/50 text-slate-700 dark:text-slate-300 hover:bg-slate-300/50 dark:hover:bg-slate-600/50 disabled:opacity-50 disabled:cursor-not-allowed"
+            variant="glass"
+            size="lg"
           >
+            <FileText className="w-4 h-4 mr-1" />
             Load Sample
-          </button>
+          </Button>
 
-          <button
+          <Button
             type="button"
             onClick={handleClear}
             disabled={isProcessing || !inputText}
-            className="px-4 py-3 rounded-lg font-medium transition-all duration-200 bg-red-100/50 dark:bg-red-900/20 text-red-700 dark:text-red-400 hover:bg-red-200/50 dark:hover:bg-red-900/40 disabled:opacity-50 disabled:cursor-not-allowed"
+            variant="outline"
+            size="lg"
+            className="text-red-700 dark:text-red-400 border-red-200 dark:border-red-800 hover:bg-red-50 dark:hover:bg-red-900/20"
           >
             Clear
-          </button>
+          </Button>
 
-          <button
+          <Button
             type="button"
             onClick={() => {
               navigator.clipboard
@@ -149,23 +138,13 @@ export const TokenizerInput: React.FC<TokenizerInputProps> = ({
                 });
             }}
             disabled={isProcessing || !inputText.trim()}
-            className="px-4 py-3 rounded-lg font-medium transition-all duration-200 bg-green-100/50 dark:bg-green-900/20 text-green-700 dark:text-green-400 hover:bg-green-200/50 dark:hover:bg-green-800/40 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            variant="outline"
+            size="lg"
+            className="text-green-700 dark:text-green-400 border-green-200 dark:border-green-800 hover:bg-green-50 dark:hover:bg-green-900/20"
           >
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-              />
-            </svg>
+            <Copy className="w-4 h-4 mr-1" />
             Copy Text
-          </button>
+          </Button>
         </div>
       </form>
 
